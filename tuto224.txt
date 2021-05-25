@@ -1,0 +1,247 @@
+<?php
+$vector=[
+'nume'=>'Leica',
+'prenume'=>'Paul',
+'varsta'=> 44,
+'familie'=> [
+'sotie'=>['Elena', 'Doina'],
+'copil'=>'Andrei'
+]
+];
+$aff=json_decode(json_encode($vector));
+echo $aff->nume;
+echo $aff->familie->sotie[0];
+?>
+
+
+
+$person = [
+    'name' => 'Brad',
+    'surname' => 'Traversy',
+    'age' => 30,
+    'hobbies' => ['Tennis', 'Video Games'],
+];
+foreach ($person as $key => $value) {
+    if ($key === 'hobbies') {
+        break;
+    }
+    echo $key . ' ' . $value . '<br>';
+}
+
+
+
+// Print current date
+echo date('Y-m-d H:i:s') . '<br>';
+
+// Print yesterday
+echo date('Y-m-d H:i:s', time() - 60 * 60 * 24) . '<br>';
+
+// Print current timestamp
+echo time() . '<br>';
+
+// Parse date: https://www.php.net/manual/en/function.date-parse.php
+$dateString = '2020-02-06 12:45:35';
+$parsedDate = date_parse($dateString); 
+echo '<pre>';
+var_dump($parsedDate);
+echo '</pre>';
+
+// Parse date from format: https://www.php.net/manual/en/function.date-parse-from-format.php
+$dateString = 'February 4 2020 12:45:35';
+
+$parsedDate = date_parse_from_format('F j Y H:i:s', $dateString);
+echo '<pre>';
+var_dump($parsedDate);
+echo '</pre>';
+
+
+
+1. Creare baza de date
+create database vuedb;
+2. Creare tabel
+CREATE TABLE `contacts` (
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `city` varchar(100),
+  `country` varchar(100),
+  `job` varchar(100)
+)
+
+
+
+<?php
+$homepage = file_get_contents('https://restcountries.eu/rest/v2/region/americas?fields=name;capital;flag;population');
+$homepage2 = json_decode($homepage);
+//echo $homepage;
+echo $homepage2[1]->flag;
+?>
+
+
+
+<?php
+class Greeting {
+public function sayHello ($to)
+{
+echo "Hello $to";
+}
+}
+$greeter = new Greeting ();
+$greeter->sayHello ("Lucian");
+?>
+
+
+
+1. Creare folder in /wp-content/plugins/wp-vue-tutorial
+2. wp-vue-tutorial.php in /wp-content/plugins/wp-vue-tutorial/wp-vue-tutorial.php
+<?php
+/**
+ * Plugin Name: WordPress Vue Tutorial
+ * Description: A demo on how to use Vue in WordPress.
+ */
+?>
+3. Activate plugin
+4. Create a shortcode in your Plugin
+//Add shortscode
+ function func_wp_vue(){
+   return "Hello Shortcode";
+}
+add_shortcode( 'wpvue', 'func_wp_vue' );
+ 
+
+
+
+Mini tutorial twig language:
+
+symfony console make:entity
+elevi: nume, prenume, email
+symfony console make:controller
+elevi
+
+$em = $this->getDoctrine()->getManager();
+        $elevi = $em->getRepository('App\Entity\Elevi')
+            ->findAll();
+        return $this->render('elevi/index.html.twig', [
+            'elevi' => $elevi
+        ]);
+<td>{{ elevi.1.nume }}</td> <br>
+<td>{{ elevi.1.prenume }}</td> <br>
+
+{% for toate in elevi %}
+                <tr>
+                    <td>{{ toate.nume }}</td> <br>
+		    <td>{{ toate.prenume }}</td> <br>
+                    <td>{{ toate.email }}</td> <br>
+                    
+                </tr>
+                
+            {% endfor %}
+
+{% set ole = 'work' %}
+{% set xnume = 'pasiune' %}
+{% set x = 'unu'%}
+{% set y = 'test'%}
+
+{% set om = {
+    'nume': 'OMUL',
+    'pasiune': {
+        'acasa': 'tenis',
+        'work': 'PHP',
+        'nr_preferat': random(1..1000),
+        'test': {
+            'unu': 'extract1',
+            'doi': 'extract2'
+        }
+    }
+}
+%}
+{{ om[xnume].test[x] }}
+{{ om[xnume][y][x] }}
+{{om[xnume].work}}
+{{om[xnume][ole]}}
+{{om.nume}}
+{{om.pasiune.acasa}}
+{{ole}}
+{{om.pasiune.work}}
+{{om.pasiune[ole]}}
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Tutorial Twig!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    {{ dump() }}
+
+
+
+    <h1>Bun venit la un nou {{ controller_name }}! ✅</h1>
+<h1>Lucrul cu Variabilele</h1>
+{% set var1 = 7%}
+{% set var2 = 'variabila222text'%}
+{% set nr = random(1..1000)%}
+Afiseaza var1: {{var1}}<br>
+Afiseaza var2: {{var2}}<br>
+var2 + var2: {{var2}}{{var2}}<br>
+Nr aleator 1..1000: {{nr}}<br>
+var1 + nr: {{var1 + nr}}<br>
+nr/var1 (valoarea reala): {{nr / var1}}<br>
+nr//var1 (partea intreaga): {{nr // var1}}<br>
+nr%var1 (restul): {{nr % var1}}<br>
+
+<h1>Lucrul cu Vectori</h1>
+{% set catalogul = [
+    'X-a',
+    'XI-b'
+]
+%}
+{{catalogul[0]}}<br>
+{{catalogul[1]}}<br>
+{{catalogul.0}} <br>
+{{catalogul.1}}
+
+<h1>Lucrul cu Obiecte</h1>
+{% set catalog = {
+    'profesor': 'Doina', 
+    'clasa': 'X - A'}
+%}
+{{catalog.profesor}} <br>
+{{catalog.clasa}} <br>
+
+{% set om = {
+    'nume': 'OMUL',
+    'pasiune': {
+        'acasa': 'tenis',
+        'work': 'PHP',
+        'nr_preferat': random(1..1000)
+    }
+}
+%}
+{{om.nume}} <br>
+{{om.pasiune.acasa}} <br>
+
+{% set ex = 2 %}
+{% set ex2 = 'text'%}
+{% set obj = {
+    ex2: 'senzational',
+    ex: om.nume
+}
+%}
+{{obj.ex2}} <br>
+{{obj.ex}} <br>
+{{ex}}
+</div>
+{% endblock %}
+
+#############################################
+
+
+
+
+
